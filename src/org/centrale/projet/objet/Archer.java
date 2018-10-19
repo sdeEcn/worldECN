@@ -20,6 +20,8 @@ public class Archer extends Personnage implements Combattant {
      */
     private int nbFleche;
 
+    private int test;
+    
     private void init(int nbfleche) {
         this.nbFleche = nbfleche;
     }
