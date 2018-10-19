@@ -21,8 +21,8 @@ public abstract class Monstre extends Creature {
      * @param degAtt = dégats par attaques
      * @param pos = position du monstre
      */
-    public Monstre(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
-        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, pos);
+    public Monstre(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt,int parade, Point2D pos) {
+        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, pos,parade);
     }
 
     public Monstre(Monstre m) {
@@ -33,6 +33,10 @@ public abstract class Monstre extends Creature {
         super();
     }
 
+    /**
+     * Affiche les informations du monstre.
+     */
+    @Override
     public void affiche() {
         System.out.println(", Pdvie : " + this.getPtVie() + ", position : " + this.getPos().affiche());
     }

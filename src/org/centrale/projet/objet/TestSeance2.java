@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +16,18 @@ import java.util.List;
  */
 public class TestSeance2 {
 
-    public static void main(String[] args) {
-        World w = new World();
-        w.creeMondeAlea(5, 0, 0, 0, 0, 0, 5, 5, 3);
-        w.afficheWorld();
+    public static void main(String[] args) throws IOException {
+        /*World w = new World();
+        w.creeMondeAlea(3, 2, 2, 2, 2, 2, 5, 5, 3);
+        //w.afficheWorld();
         for (int k = 0; k < 10; k++) {
             System.out.println("tour n°" + k);
             w.tourdejeu();
-        }
+        }*/
+        ChargementRapide cr = new ChargementRapide("resources/Sauvegarde-WoE.txt");
+        cr.init();
+        World w =cr.chargerPartie();
+        w.afficheWorld();
 
     }
 

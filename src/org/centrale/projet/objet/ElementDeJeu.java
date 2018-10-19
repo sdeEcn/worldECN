@@ -6,7 +6,7 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Definit un element du jeu.
  * @author antoinehurard
  */
 public abstract class ElementDeJeu {

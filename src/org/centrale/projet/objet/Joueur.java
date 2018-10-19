@@ -6,11 +6,14 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Définit le personnage joueur.
  * @author antoinehurard
  */
 public class Joueur {
 
+    /**
+     * le personnage incarné par le joueur.
+     */
     private Personnage perso;
 
     public Joueur() {

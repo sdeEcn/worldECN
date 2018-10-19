@@ -33,6 +33,8 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * position en 2D du personnage
      */
     private Point2D pos;
+    
+    private int parade;
 
     /**
      *
@@ -42,20 +44,21 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param degAtt dégats par attaques
      * @param pos position de l'entité
      */
-    public Creature(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
+    public Creature(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos,int parade) {
         this.ptVie = ptVie;
         this.pourcentageAtt = pourcentageAtt;
         this.pourcentagePar = pourcentagePar;
         this.degAtt = degAtt;
         this.pos = new Point2D(pos);
+        this.parade= parade;
     }
 
     public Creature(Creature c) {
-        this(c.getPtVie(), c.getPourcentageAtt(), c.getPourcentagePar(), c.getDegAtt(), c.getPos());
+        this(c.getPtVie(), c.getPourcentageAtt(), c.getPourcentagePar(), c.getDegAtt(), c.getPos(),c.getParade());
     }
 
     public Creature() {
-        this(0, 0, 0, 0, new Point2D());
+        this(0, 0, 0, 0, new Point2D(),0);
     }
 
     /**
@@ -202,4 +205,18 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     }
 
     public abstract void affiche();
+
+    /**
+     * @return the parade
+     */
+    public int getParade() {
+        return parade;
+    }
+
+    /**
+     * @param parade the parade to set
+     */
+    public void setParade(int parade) {
+        this.parade = parade;
+    }
 }

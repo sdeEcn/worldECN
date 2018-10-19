@@ -8,7 +8,7 @@ package org.centrale.projet.objet;
 import java.util.Random;
 
 /**
- *
+ * Définit un loup dans le jeu.
  * @author Alban
  */
 public class Loup extends Monstre implements Combattant {
@@ -17,8 +17,8 @@ public class Loup extends Monstre implements Combattant {
         super();
     }
 
-    public Loup(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
-        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, pos);
+    public Loup(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt,int parade, Point2D pos) {
+        super(ptVie, pourcentageAtt, pourcentagePar, degAtt,parade, pos);
     }
 
     /**
@@ -45,7 +45,11 @@ public class Loup extends Monstre implements Combattant {
             }
         }
     }
-
+    
+    /**
+     * Affiche les informations du loup.
+     */
+    @Override
     public void affiche() {
         System.out.print("Loup");
         super.affiche();

@@ -13,7 +13,7 @@ package org.centrale.projet.objet;
 public class Paysan extends Personnage {
 
     public Paysan() {
-        this("", 0, 0, 0, 0, 0, 0, 0, 0, 0, new Point2D());
+        this("", 0, 0, 0, 0, 0, 0, 0, 0, 0,0, new Point2D());
     }
 
     /**
@@ -32,14 +32,18 @@ public class Paysan extends Personnage {
      * @param distAttMax = portée des attaques
      * @param pos = postition du personnage
      */
-    public Paysan(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
-        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
+    public Paysan(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax,int parade, Point2D pos) {
+        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos,parade);
     }
 
     public Paysan(Paysan p) {
         super((Paysan) p);
     }
 
+    /**
+     * Affiche les informations du paysan.
+     */
+    @Override
     public void affiche() {
         System.out.print("Paysan, ");
         super.affiche();

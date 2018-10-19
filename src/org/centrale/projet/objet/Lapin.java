@@ -21,8 +21,8 @@ public class Lapin extends Monstre {
      * @param degAtt = dégats par attaques
      * @param pos = position du monstre
      */
-    public Lapin(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
-        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, pos);
+    public Lapin(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt,int parade, Point2D pos) {
+        super(ptVie, pourcentageAtt, pourcentagePar, degAtt,parade, pos);
     }
 
     public Lapin() {
@@ -32,7 +32,11 @@ public class Lapin extends Monstre {
     public Lapin(Lapin l) {
         super((Monstre) l);
     }
-
+    
+    /**
+     * Affiche les informations du lapin.
+     */
+    @Override
     public void affiche() {
         System.out.print("Lapin");
         super.affiche();

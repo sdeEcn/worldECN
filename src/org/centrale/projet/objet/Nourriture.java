@@ -6,14 +6,30 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Définit une nourriture dans le jeu, c'est un bonus ou un malus pour un 
+ * personnage qui le ramasse.
  * @author antoinehurard
  */
 public class Nourriture extends Objet {
 
+    /**
+     * vrai si bonus, faux si malus.
+     */
     private boolean bonus;
+    
+    /**
+     * entier définissant la caractéristique à modifier.
+     */
     private int caracInfluence;
+    
+    /**
+     * le nombre de tour restant.
+     */
     private int duree;
+    
+    /**
+     * le nombre de points d'influence.
+     */
     private int pouvoir;
 
     public Nourriture() {
@@ -58,10 +74,18 @@ public class Nourriture extends Objet {
         this.pouvoir = pouvoir;
     }
 
+    /**
+     * Affiche les informations de la nourriture.
+     */
+    @Override
     public void affiche() {
         System.out.println("Nourriture, " + this.getPos().affiche());
     }
 
+    /**
+     * Modifie les caractéristiques d'un personnage.
+     * @param p = le personnage à influencer.
+     */
     public void pouvoir(Personnage p) {
         int i = this.isBonus() ? 1 : -1;
         switch (this.getCaracInfluence()) {
@@ -92,6 +116,10 @@ public class Nourriture extends Objet {
 
     }
 
+    /**
+     * Enlève l'effet sur le personnage.
+     * @param p = le personnage à influencer.
+     */
     public void normal(Personnage p) {
         int i = this.isBonus() ? -1 : 1;
 

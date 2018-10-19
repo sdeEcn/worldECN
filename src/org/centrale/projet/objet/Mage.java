@@ -8,7 +8,7 @@ package org.centrale.projet.objet;
 import java.util.Random;
 
 /**
- *
+ * Définit un mage dans le jeu.
  * @author Alban
  */
 public class Mage extends Personnage implements Combattant {
@@ -17,8 +17,8 @@ public class Mage extends Personnage implements Combattant {
         super();
     }
 
-    public Mage(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
-        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
+    public Mage(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax,int parade, Point2D pos) {
+        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos,parade);
     }
 
     /**
@@ -50,7 +50,11 @@ public class Mage extends Personnage implements Combattant {
             System.out.println("Pas assez de mana");
         }
     }
-
+    
+    /**
+     * Affiche les informations du mage.
+     */
+    @Override
     public void affiche() {
         System.out.print("Mage, pdmana : " + getPtMana() + ", ");
         super.affiche();

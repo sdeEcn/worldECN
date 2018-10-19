@@ -6,7 +6,7 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Définit une potion.
  * @author Alban
  */
 public abstract class Potion extends Objet {
@@ -23,6 +23,10 @@ public abstract class Potion extends Objet {
         super(p);
     }
 
+    /**
+     * Affiche les informations de la potion.
+     */
+    @Override
     public void affiche() {
         System.out.println(this.getPos().affiche());
     }

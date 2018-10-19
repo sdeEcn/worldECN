@@ -44,7 +44,7 @@ public abstract class Personnage extends Creature {
     private List<Nourriture> nourriture;
 
     public Personnage() {
-        this("", 0, 0, 0, 0, 0, 0, 0, 0, 0, new Point2D());
+        this("", 0, 0, 0, 0, 0, 0, 0, 0, 0, new Point2D(),0);
     }
 
     /**
@@ -62,8 +62,8 @@ public abstract class Personnage extends Creature {
      * @param distAttMax = portée des attaques
      * @param pos = postition du personnage
      */
-    public Personnage(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
-        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, new Point2D(pos));
+    public Personnage(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos,int parade) {
+        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, new Point2D(pos),parade);
         this.nom = nom;
         this.ptMana = ptMana;
         this.pourcentageMag = pourcentageMag;
@@ -79,7 +79,7 @@ public abstract class Personnage extends Creature {
      * @param p = personnage à copier.
      */
     public Personnage(Personnage p) {
-        this(p.getNom(), p.getPtVie(), p.getPtMana(), p.getPourcentageAtt(), p.getPourcentagePar(), p.getPourcentageMag(), p.getPourcentageResistMag(), p.getDegAtt(), p.getDegMag(), p.getDistAttMax(), p.getPos());
+        this(p.getNom(), p.getPtVie(), p.getPtMana(), p.getPourcentageAtt(), p.getPourcentagePar(), p.getPourcentageMag(), p.getPourcentageResistMag(), p.getDegAtt(), p.getDegMag(), p.getDistAttMax(), p.getPos(),p.getParade());
     }
 
     public void affiche() {
@@ -172,6 +172,10 @@ public abstract class Personnage extends Creature {
         this.distAttMax = distAttMax;
     }
 
+    /**
+     * Enlève un tour d'effet aux nourritures.
+     * Supprime les nourritures avariées.
+     */
     public void verifierNourriture() {
         List<Integer> aSupprimer = new ArrayList<Integer>();
         this.nourriture.forEach((n) -> {
@@ -190,6 +194,10 @@ public abstract class Personnage extends Creature {
         }
     }
 
+    /**
+     * Ajoute une nourriture au personnage.
+     * @param n = la nourriture à ajouter.
+     */
     public void ajouterNourriture(Nourriture n) {
         nourriture.add(n);
     }

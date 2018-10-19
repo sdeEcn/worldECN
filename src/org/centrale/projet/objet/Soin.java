@@ -6,11 +6,14 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Définit une potion de soin.
  * @author Alban
  */
 public class Soin extends Potion {
 
+    /**
+     * le nombre de points de vie récupérés grâce à la potion.
+     */
     private int pouvoir;
 
     public Soin() {
@@ -46,7 +49,6 @@ public class Soin extends Potion {
     public void gueri(Personnage c) {
 
         c.setPtVie(Math.min(c.getPtVie() + pouvoir, 100));
-        System.out.println("l'entité a maintenant " + c.getPtVie() + " PV");
         System.out.println();
     }
 
@@ -64,6 +66,10 @@ public class Soin extends Potion {
         this.pouvoir = pouvoir;
     }
 
+    /**
+     * Affiche les informations de la potion de soin.
+     */
+    @Override
     public void affiche() {
         System.out.print("Soin, ");
         super.affiche();

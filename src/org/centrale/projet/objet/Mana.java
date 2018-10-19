@@ -6,11 +6,14 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Définit une potion de mana.
  * @author Alban
  */
 public class Mana extends Potion {
 
+    /**
+     * Le nombre de points de mana rendus par la potion.
+     */
     private int pouvoir;
 
     public Mana(int pouvoir) {
@@ -42,6 +45,10 @@ public class Mana extends Potion {
         this.pouvoir = 0;
     }
 
+    /**
+     * Affiche les informations de la potion.
+     */
+    @Override
     public void affiche() {
         System.out.print("Mana, ");
         super.affiche();

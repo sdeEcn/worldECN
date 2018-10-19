@@ -6,13 +6,20 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Interface permettant aux entités de se déplacer.
  * @author antoinehurard
  */
 public interface Deplacable {
 
+    /**
+     * Déplacement sans paramètre.
+     */
     public void deplacer();
 
+    /**
+     * Déplacement avec paramètre de dircetion.
+     * @param d = entier représentant une direction.
+     */
     public void deplacer(int d);
 
 }

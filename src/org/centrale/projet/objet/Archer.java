@@ -20,8 +20,6 @@ public class Archer extends Personnage implements Combattant {
      */
     private int nbFleche;
 
-    private int test;
-    
     private void init(int nbfleche) {
         this.nbFleche = nbfleche;
     }
@@ -54,8 +52,8 @@ public class Archer extends Personnage implements Combattant {
      * @param nbFleche = nombre de flèches disponible dans le carquois de
      * l'archer
      */
-    public Archer(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos, int nbFleche) {
-        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
+    public Archer(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax,int parade, Point2D pos, int nbFleche) {
+        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos,parade);
         init(nbFleche);
     }
 
@@ -66,7 +64,11 @@ public class Archer extends Personnage implements Combattant {
     public void setNbFleche(int nbFleche) {
         this.nbFleche = nbFleche;
     }
-
+    
+    /**
+     * Affiche les informations utiles du personnage.
+     */
+    @Override
     public void affiche() {
         System.out.print("Archer, nbfleches : " + nbFleche + ", ");
         super.affiche();
@@ -74,7 +76,6 @@ public class Archer extends Personnage implements Combattant {
 
     /**
      * Permet d'infliger des dégats à son adversaire c.
-     *
      * @param c adversaire du guerrier.
      */
     @Override
@@ -88,19 +89,23 @@ public class Archer extends Personnage implements Combattant {
                 if (success < this.getPourcentageAtt()) { // L'attaque réussie
                     int parade = rand.nextInt(100);
                     int degats;
-
-                    degats = this.getDegAtt();
-
+                    if (parade <= c.getPourcentagePar()) {
+                        degats = this.getDegAtt() - parade;
+                        System.out.println("Parade de l'adversaire.");
+                    } else {
+                        degats = this.getDegAtt();
+                        System.out.println("Aucune parade de l'adversaire.");
+                    }
                     c.setPtVie(c.getPtVie() - degats); //on inflige des dégats à l'adversaire.
-                    System.out.println("Attaque réussie : vous avez infligé " + degats + " de dégats à l'adversaire");
+                    System.out.println("Attaque réussie de " + getNom() + " : " + degats + " dégats infligés.");
                 } else {
-                    System.out.println("l'attaque échoue!!");
+                    System.out.println("Dans le vide!");
                 }
             } else {
                 System.out.println("Trop loin, dommage!");
             }
         } else {
-            System.out.println("Oups... plus de flèches");
+            System.out.println("Oups... plus de flèches.");
         }
     }
 }

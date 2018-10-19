@@ -18,8 +18,8 @@ public class Guerrier extends Personnage implements Combattant {
         super();
     }
 
-    public Guerrier(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
-        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
+    public Guerrier(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax,int parade, Point2D pos) {
+        super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos,parade);
     }
 
     /**
@@ -38,13 +38,13 @@ public class Guerrier extends Personnage implements Combattant {
                 int degats;
                 if (parade <= c.getPourcentagePar()) {
                     degats = this.getDegAtt() - parade;
-                    System.out.println("Parade de l'adversaire");
+                    System.out.println("Parade de l'adversaire.");
                 } else {
                     degats = this.getDegAtt();
-                    System.out.println("Aucune parade de l'adversaire");
+                    System.out.println("Aucune parade de l'adversaire.");
                 }
                 c.setPtVie(c.getPtVie() - degats); //on inflige des dégats à l'adversaire.
-                System.out.println("Attaque réussie : " + degats + " dégats infligés.");
+                System.out.println("Attaque réussie de " + getNom() + " : " + degats + " dégats infligés.");
             } else {
                 System.out.println("Dans le vide!");
             }
@@ -52,7 +52,11 @@ public class Guerrier extends Personnage implements Combattant {
             System.out.println("Oups! loupé!!");
         }
     }
-
+    
+    /**
+     * Affiche les informations du guerrier.
+     */
+    @Override
     public void affiche() {
         System.out.print("Guerrier, ");
         super.affiche();
