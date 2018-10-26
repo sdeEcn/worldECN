@@ -1,0 +1,29 @@
+Largeur 15
+Hauteur 15
+Guerrier Guerrier 0 200 0 60 18 0 16 58 0 1 15 3 5
+Guerrier Guerrier 1 200 0 90 19 0 13 46 0 1 15 3 3
+Archer Archer 0 100 0 24 38 0 34 58 0 23 10 7 14
+Archer Archer 1 100 0 52 12 0 2 76 0 16 10 13 1
+Archer Archer 2 100 0 41 25 0 0 86 0 17 10 6 2
+Mage Mage 0 100 52 70 31 20 7 82 94 2 5 14 1
+Mage Mage 1 100 50 67 22 53 31 64 81 2 5 3 10
+Paysan Paysan 0 100 0 0 9 0 0 0 0 0 0 9 1
+Paysan Paysan 1 100 0 0 7 0 0 0 0 0 0 9 0
+Lapin 100 20 311 1 12 8
+Lapin 100 8 610 1 2 14
+Loup 100 50 2030 1 8 14
+Loup 100 69 3343 1 0 3
+Soin 82 13 14
+Soin 19 12 11
+Soin 65 2 5
+Soin 94 3 2
+Soin 55 5 13
+Mana 42 9 2
+Mana 18 0 7
+Mana 15 2 9
+Mana 81 2 0
+Mana 93 13 1
+NuageToxique 50 50 50 5 4 14
+NuageToxique 50 50 50 5 7 4
+NuageToxique 50 50 50 5 1 4
+Joueur Archer Alban 100 0 45 27 0 28 87 0 21 10 9 9

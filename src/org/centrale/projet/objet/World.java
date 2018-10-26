@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,6 +21,8 @@ import java.util.InputMismatchException;
  * @author Alban
  */
 public class World {
+
+    
 
     /**
      * Archer initialement présent dans le monde.
@@ -100,6 +103,72 @@ public class World {
         this.monde = new String[taille * taille];
     }
 
+    private void monde(){
+        for(int i = 0; i < monde.length ; i+=1)
+        {
+            monde[i]= ".";
+        }
+        
+        archer.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "A";
+        });
+
+        paysan.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "P";
+        });
+        
+        guerrier.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "G";
+        });
+        
+        mage.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "M";
+        });
+        
+        loup.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "L";
+        });
+        
+        lapin.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "l";
+        });
+        
+        soin.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "s";
+        });
+        
+        magie.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "m";
+        });
+        
+        nuage.forEach((p) -> {
+            monde[p.getPos().getX() + p.getPos().getY() * getTaille()] = "@";
+        });
+        
+    }
+    
+    public void debutPartie() throws IOException{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nouvelle Partie : 1, Chargez Sauvegarde : 2");
+        int entree=-1;
+        String nom;
+        while(entree!=1 && entree !=2){
+        entree=sc.nextInt();
+        }
+        if(entree==1){
+            this.creeMondeAlea(3, 2, 2, 2, 2, 2, 5, 5, 3);
+            
+        }else{
+           System.out.println("Entrez le nom de la sauvegarde :");
+           
+            nom = sc.next();
+            ChargementRapide cr = new ChargementRapide(SauvegardePartie.REPOSITORY+ nom +SauvegardePartie.EXTENSION);
+            cr.init();
+            this.copie(cr.chargerPartie());
+            cr.close();
+        }
+    }
+    
     public void creeMondeAlea() {
         for(int i = 0; i < monde.length ; i+=1)
         {
@@ -134,7 +203,7 @@ public class World {
         nourriture.add(new Nourriture(p2, false, 1, 2, 20));
         monde[p2.getX() + p2.getY() * getTaille()] = "n";
         creationJoueur(pt.get(pt.size() - 1));
-        joueur.getPerso().affiche();
+        getJoueur().getPerso().affiche();
         
     }
 
@@ -168,7 +237,7 @@ public class World {
         nourriture.add(new Nourriture(p2, false, 1, 2, 20));
         monde[p2.getX() + p2.getY() * getTaille()] = "n";
         creationJoueur(pt.get(pt.size() - 1));
-        joueur.getPerso().affiche();
+        getJoueur().getPerso().affiche();
     }
 
     /**
@@ -200,23 +269,23 @@ public class World {
 
         Random rand = new Random();
         if (null == nomClasse) {
-            joueur.setPerso(new Guerrier(nomPerso, 200, 0, rand.nextInt(50) + 50,
+            getJoueur().setPerso(new Guerrier(nomPerso, 200, 0, rand.nextInt(50) + 50,
                     rand.nextInt(30) + 10, 0, rand.nextInt(35), rand.nextInt(50) + 40, 0,
                     rand.nextInt(1) + 1,10, pos));
         } else {
             switch (nomClasse) {
                 case "Archer":
-                    joueur.setPerso(new Archer(nomPerso, 100, 0, rand.nextInt(40) + 20,
+                    getJoueur().setPerso(new Archer(nomPerso, 100, 0, rand.nextInt(40) + 20,
                             rand.nextInt(30) + 10, 0, rand.nextInt(35), rand.nextInt(50) + 40, 0,
                             rand.nextInt(10) + 15,10, pos, rand.nextInt(10) + 10));
                     break;
                 case "Guerrier":
-                    joueur.setPerso(new Guerrier(nomPerso, 200, 0, rand.nextInt(50) + 50,
+                    getJoueur().setPerso(new Guerrier(nomPerso, 200, 0, rand.nextInt(50) + 50,
                             rand.nextInt(30) + 10, 0, rand.nextInt(35), rand.nextInt(50) + 40, 0,
                             rand.nextInt(1) + 1,10, pos));
                     break;
                 default:
-                    joueur.setPerso(new Mage(nomPerso, 100, rand.nextInt(50) + 50,
+                    getJoueur().setPerso(new Mage(nomPerso, 100, rand.nextInt(50) + 50,
                             rand.nextInt(50) + 50, rand.nextInt(30) + 10, rand.nextInt(50) + 20,
                             rand.nextInt(35), rand.nextInt(50) + 40, rand.nextInt(50) + 50,
                             rand.nextInt(3) + 2,10, pos));
@@ -301,162 +370,51 @@ public class World {
         monstre.addAll(this.loup);
         monstre.addAll(this.lapin);
 
-        Personnage pJoueur = joueur.getPerso();
+        Personnage pJoueur = getJoueur().getPerso();
         
-        personnage.forEach((c) -> {
-            deplacer(c);
-        });
-
-        monstre.forEach((c) -> {
-            deplacer(c);
-        });
-        
-        personnage.forEach((c) -> {
-
-            int index = -1;
-            for (int i = 0; i < soin.size(); i++) {
-                Soin s = soin.get(i);
-                if (c.getPos().equal(s.getPos())) {
-                    s.gueri(c);
-                    System.out.println(c.getNom() + " vient de se regénérer. "
-                            + "Il a maintenant " + c.getPtVie() + ".");
-                    index = i;
-                }
-            }
-            if (index != -1) {
-                detruireElement(soin.get(index));
-                index = -1;
-            }
-
-            for (int i = 0; i < nourriture.size(); i++) {
-                Nourriture n = nourriture.get(i);
-                if (c.getPos().equal(n.getPos())) {
-                    n.pouvoir(c);
-                    System.out.println(c.getNom() + " vient de manger de la nourriture.");
-                    index = i;
-                    c.ajouterNourriture(n);
-                }
-            }
-            if (index != -1) {
-                detruireElement(nourriture.get(index));
-            }
-        });
-
-        this.mage.forEach((c) -> {
-            int index = -1;
-            for (int i = 0; i < magie.size(); i++) {
-                Mana m = magie.get(i);
-                if (c.getPos().equal(m.getPos())) {
-                    m.magie(c);
-                    System.out.println(c.getNom() + " vient de récupérer du mana. "
-                            + "Il a maintenant " + c.getPtMana());
-                    index = i;
-                }
-            }
-            if (index != -1) {
-                detruireElement(magie.get(index));
-            }
-        });
-
-        nuage.forEach((n) -> {
-            deplacer(n);
-            List<Integer> aSupprimer = new ArrayList<Integer>();
-            for (int i = 0; i < personnage.size(); i++) {
-                Personnage p = personnage.get(i);
-                if (p.getPos().equal(n.getPos())) {
-                    n.combattre(p);
-                    if (p.getPtVie() <= 0) {
-                        aSupprimer.add(i);
-                    }
-                }
-            }
-            if (aSupprimer.size() >= 0) {
-                for (int i = aSupprimer.size() - 1; i == 0; i--) {
-                    personnage.remove(aSupprimer.get(i));
-                }
-            }
-
-            aSupprimer = new ArrayList<Integer>();
-            for (int i = 0; i < monstre.size(); i++) {
-                Monstre m = monstre.get(i);
-                if (m.getPos().equal(n.getPos())) {
-                    n.combattre(m);
-                    if (m.getPtVie() <= 0) {
-                        aSupprimer.add(i);
-                    }
-                }
-            }
-            if (aSupprimer.size() >= 0) {
-                for (int i = aSupprimer.size() - 1; i == 0; i--) {
-                    monstre.remove(aSupprimer.get(i));
-                }
-            }
-
-            if (n.getPos().equal(pJoueur.getPos())) {
-                n.combattre(pJoueur);
-            }
-        });
-        
-        soin.forEach((s) ->{
-            Point2D p = s.getPos();
-            if(monde[p.getX() + p.getY()*getTaille()] == ".")
-            {
-                monde[p.getX() + p.getY()*getTaille()] = "s";
-            }
-        });
-        
-        magie.forEach((m) ->{
-            Point2D p = m.getPos();
-            if(monde[p.getX() + p.getY()*getTaille()] == ".")
-            {
-                monde[p.getX() + p.getY()*getTaille()] = "m";
-            }
-        });
-        
-        nourriture.forEach((n) ->{
-            Point2D p = n.getPos();
-            if(monde[p.getX() + p.getY()*getTaille()] == ".")
-            {
-                monde[p.getX() + p.getY()*getTaille()] = "n";
-            }
-        });
+       initialisationTour(personnage,monstre,pJoueur);
 
         dessineMonde();
         System.out.println("Vos statistiques : ");
         pJoueur.affiche();
         System.out.println();
-        
+        String nom;
         List<Creature> aPortee = new ArrayList<Creature>();
         List<Point2D> posAutour = new ArrayList<Point2D>();
         Point2D pos = pJoueur.getPos();
-        int portee = pJoueur.getDistAttMax();
-        personnage.forEach((c) -> {
-            if (c.getPos().distance(pos) <= portee) {
-                aPortee.add(c);
-                posAutour.add(c.getPos());
-            }
-        });
-        monstre.forEach((c) -> {
-            if (c.getPos().distance(pos) <= portee) {
-                aPortee.add(c);
-                posAutour.add(c.getPos());
-            }
-        });
-        if (aPortee.size() > 0) {
-            System.out.println("Vous pouvez attaquer :");
-            aPortee.forEach((c) -> {
-                c.affiche();
-            });
-        } else {
-            System.out.println("Aucune créature à portée.");
-        }
+        afficherAutour(personnage,monstre,aPortee,pJoueur,posAutour,pos);
         int action = -1;
-        while (action != 0 && action != 1) {
-            System.out.println("Vous déplacez : 0 , combattre : 1");
+        while (action != 0 && action != 1 && action != 2) {
+            System.out.println("Vous déplacez : 0 , combattre : 1, sauvegarder : 2");
             action = sc.nextInt();
         }
         if (action == 0) {
-            int direction = -1;
+            deplacer(pJoueur,sc,posAutour);
+        } else if (action ==1) {
+            combat(aPortee, sc, pJoueur);
+        }else if( action==2){
+            System.out.println("Entrez le nom de la sauvegarde : ");
+            try{
+                nom = sc.next();
+            }
+            catch(InputMismatchException exception)
+            {
+                  nom="test";
+                  System.out.println("Entrez une chaîne de caractère.");      
+            }
+            SauvegardePartie sv= new SauvegardePartie(nom);
+            sv.init();
+            sv.sauvegarder(this);
+        }
+        pJoueur.verifierNourriture();
+        personnage.forEach((c) -> {
+            c.verifierNourriture();
+        });
+
+    }
+    
+    public void deplacer(Personnage pJoueur,Scanner sc,List<Point2D> posAutour){
+        int direction = -1;
             boolean test = false;
             Point2D initPos = new Point2D(pJoueur.getPos());
             monde[initPos.getX() + initPos.getY()*getTaille()] = ".";
@@ -535,8 +493,10 @@ public class World {
                     n.combattre(pJoueur);
                 }
             });
-        } else {
-            if (aPortee.size() > 0) {
+    }
+
+    public void combat(List<Creature> aPortee,Scanner sc,Personnage pJoueur){
+        if (aPortee.size() > 0) {
                 int combat = -1;
                 while (combat < 0 || combat >= aPortee.size()) {
                     Iterator<Creature> listIt = aPortee.iterator();
@@ -571,14 +531,9 @@ public class World {
             } else {
                 System.out.println("Aucune créature à portée. Vous ne faites rien.");
             }
-        }
-        pJoueur.verifierNourriture();
-        personnage.forEach((c) -> {
-            c.verifierNourriture();
-        });
-
     }
-
+    
+    
     /**
      * Affiche les informations du monde.
      */
@@ -914,6 +869,13 @@ public class World {
         this.joueur = joueur;
     }
     
+    /**
+     * @return the joueur
+     */
+    public Joueur getJoueur() {
+        return joueur;
+    }
+    
     public void setTaille(int taille){
         this.taille=taille;
     }
@@ -923,5 +885,167 @@ public class World {
      */
     public int getTaille() {
         return taille;
+    }
+
+    private void afficherAutour(List<Personnage> personnage, List<Monstre> monstre, List<Creature> aPortee, Personnage pJoueur, List<Point2D> posAutour, Point2D pos) {
+        int portee = pJoueur.getDistAttMax();
+        personnage.forEach((c) -> {
+            if (c.getPos().distance(pos) <= portee) {
+                aPortee.add(c);
+                posAutour.add(c.getPos());
+            }
+        });
+        monstre.forEach((c) -> {
+            if (c.getPos().distance(pos) <= portee) {
+                aPortee.add(c);
+                posAutour.add(c.getPos());
+            }
+        });
+        if (aPortee.size() > 0) {
+            System.out.println("Vous pouvez attaquer :");
+            aPortee.forEach((c) -> {
+                c.affiche();
+            });
+        } else {
+            System.out.println("Aucune créature à portée.");
+        }
+    }
+
+    private void initialisationTour(List<Personnage> personnage, List<Monstre> monstre, Personnage pJoueur) {
+        
+        
+         personnage.forEach((c) -> {
+            deplacer(c);
+        });
+
+        monstre.forEach((c) -> {
+            deplacer(c);
+        });
+        
+        personnage.forEach((c) -> {
+
+            int index = -1;
+            for (int i = 0; i < soin.size(); i++) {
+                Soin s = soin.get(i);
+                if (c.getPos().equal(s.getPos())) {
+                    s.gueri(c);
+                    System.out.println(c.getNom() + " vient de se regénérer. "
+                            + "Il a maintenant " + c.getPtVie() + ".");
+                    index = i;
+                }
+            }
+            if (index != -1) {
+                detruireElement(soin.get(index));
+                index = -1;
+            }
+
+            for (int i = 0; i < nourriture.size(); i++) {
+                Nourriture n = nourriture.get(i);
+                if (c.getPos().equal(n.getPos())) {
+                    n.pouvoir(c);
+                    System.out.println(c.getNom() + " vient de manger de la nourriture.");
+                    index = i;
+                    c.ajouterNourriture(n);
+                }
+            }
+            if (index != -1) {
+                detruireElement(nourriture.get(index));
+            }
+        });
+
+        this.mage.forEach((c) -> {
+            int index = -1;
+            for (int i = 0; i < magie.size(); i++) {
+                Mana m = magie.get(i);
+                if (c.getPos().equal(m.getPos())) {
+                    m.magie(c);
+                    System.out.println(c.getNom() + " vient de récupérer du mana. "
+                            + "Il a maintenant " + c.getPtMana());
+                    index = i;
+                }
+            }
+            if (index != -1) {
+                detruireElement(magie.get(index));
+            }
+        });
+
+        nuage.forEach((n) -> {
+            deplacer(n);
+            List<Integer> aSupprimer = new ArrayList<Integer>();
+            for (int i = 0; i < personnage.size(); i++) {
+                Personnage p = personnage.get(i);
+                if (p.getPos().equal(n.getPos())) {
+                    n.combattre(p);
+                    if (p.getPtVie() <= 0) {
+                        aSupprimer.add(i);
+                    }
+                }
+            }
+            if (aSupprimer.size() >= 0) {
+                for (int i = aSupprimer.size() - 1; i == 0; i--) {
+                    personnage.remove(aSupprimer.get(i));
+                }
+            }
+
+            aSupprimer = new ArrayList<Integer>();
+            for (int i = 0; i < monstre.size(); i++) {
+                Monstre m = monstre.get(i);
+                if (m.getPos().equal(n.getPos())) {
+                    n.combattre(m);
+                    if (m.getPtVie() <= 0) {
+                        aSupprimer.add(i);
+                    }
+                }
+            }
+            if (aSupprimer.size() >= 0) {
+                for (int i = aSupprimer.size() - 1; i == 0; i--) {
+                    monstre.remove(aSupprimer.get(i));
+                }
+            }
+
+            if (n.getPos().equal(pJoueur.getPos())) {
+                n.combattre(pJoueur);
+            }
+        });
+        
+        soin.forEach((s) ->{
+            Point2D p = s.getPos();
+            if(monde[p.getX() + p.getY()*getTaille()] == ".")
+            {
+                monde[p.getX() + p.getY()*getTaille()] = "s";
+            }
+        });
+        
+        magie.forEach((m) ->{
+            Point2D p = m.getPos();
+            if(monde[p.getX() + p.getY()*getTaille()] == ".")
+            {
+                monde[p.getX() + p.getY()*getTaille()] = "m";
+            }
+        });
+        
+        nourriture.forEach((n) ->{
+            Point2D p = n.getPos();
+            if(monde[p.getX() + p.getY()*getTaille()] == ".")
+            {
+                monde[p.getX() + p.getY()*getTaille()] = "n";
+            }
+        });
+    }
+
+    private void copie(World w) {
+        this.archer.addAll(w.archer);
+        this.paysan.addAll(w.paysan);
+        this.lapin.addAll(w.lapin);
+        this.guerrier.addAll(w.guerrier);
+        this.loup.addAll(w.loup);
+        this.mage.addAll(w.mage);
+        this.magie.addAll(w.magie);
+        this.soin.addAll(w.soin);
+        this.nuage.addAll(w.nuage);
+        this.joueur = w.getJoueur();
+        this.taille=w.taille;
+        this.monde = new String[taille * taille];
+        monde();
     }
 }
