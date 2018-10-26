@@ -61,5 +61,7 @@ public class Guerrier extends Personnage implements Combattant {
         System.out.print("Guerrier, ");
         super.affiche();
     }
-
+    
+    @Override
+    public String symbole(){return "G";}
 }

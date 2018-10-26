@@ -44,5 +44,7 @@ public abstract class Objet extends ElementDeJeu {
     }
 
     public abstract void affiche();
-
+    
+    @Override
+    public abstract String symbole();
 }

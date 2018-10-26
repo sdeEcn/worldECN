@@ -48,4 +48,7 @@ public class Paysan extends Personnage {
         System.out.print("Paysan, ");
         super.affiche();
     }
+    
+     @Override
+    public String symbole(){return "P";}
 }

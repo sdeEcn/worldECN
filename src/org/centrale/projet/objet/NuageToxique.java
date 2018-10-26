@@ -119,4 +119,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         System.out.println("Le nuage toxique a infligé " + poison + " points de"
                 + " dégats à l'entité.");
     }
+    
+    @Override
+    public String symbole(){return "@";}
 }

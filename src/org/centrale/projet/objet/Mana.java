@@ -76,5 +76,7 @@ public class Mana extends Potion {
     public void setPouvoir(int pouvoir) {
         this.pouvoir = pouvoir;
     }
-
+    
+    @Override
+    public String symbole(){return "m";}
 }

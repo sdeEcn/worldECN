@@ -80,32 +80,31 @@ public class Archer extends Personnage implements Combattant {
      */
     @Override
     public void combattre(Creature c) {
+        System.out.println("Tour de combat de " + getNom() + " :");
         if (this.nbFleche > 0) {
             this.setNbFleche(this.nbFleche - 1);
             Random rand = new Random();
             int success = rand.nextInt(100), distance;
             distance = this.getPos().distance(c.getPos());
             if (distance <= this.getDistAttMax()) {//On vérifie que l'on peut toucher l'adversaire
-                if (success < this.getPourcentageAtt()) { // L'attaque réussie
-                    int parade = rand.nextInt(100);
-                    int degats;
-                    if (parade <= c.getPourcentagePar()) {
-                        degats = this.getDegAtt() - parade;
-                        System.out.println("Parade de l'adversaire.");
+                if (distance > 1) {
+                    if (success < this.getPourcentageAtt()) { // L'attaque réussie
+                        c.setPtVie(c.getPtVie() - this.getDegAtt()); //on inflige des dégats à l'adversaire.
+                        System.out.println("Attaque réussie de " + getNom() + " : " + this.getDegAtt() + " dégats infligés.");
                     } else {
-                        degats = this.getDegAtt();
-                        System.out.println("Aucune parade de l'adversaire.");
+                        System.out.println("Dans le vide!");
                     }
-                    c.setPtVie(c.getPtVie() - degats); //on inflige des dégats à l'adversaire.
-                    System.out.println("Attaque réussie de " + getNom() + " : " + degats + " dégats infligés.");
                 } else {
-                    System.out.println("Dans le vide!");
+                    System.out.println("Trop près.");
                 }
             } else {
-                System.out.println("Trop loin, dommage!");
+                System.out.println("Trop loin.");
             }
         } else {
             System.out.println("Oups... plus de flèches.");
         }
     }
+    
+    @Override
+    public String symbole(){return "A";}
 }

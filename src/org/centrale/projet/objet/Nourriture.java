@@ -206,4 +206,7 @@ public class Nourriture extends Objet {
     public void setPouvoir(int pouvoir) {
         this.pouvoir = pouvoir;
     }
+    
+    @Override
+    public String symbole(){return "n";}
 }

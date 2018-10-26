@@ -82,6 +82,9 @@ public abstract class Personnage extends Creature {
         this(p.getNom(), p.getPtVie(), p.getPtMana(), p.getPourcentageAtt(), p.getPourcentagePar(), p.getPourcentageMag(), p.getPourcentageResistMag(), p.getDegAtt(), p.getDegMag(), p.getDistAttMax(), p.getPos(),p.getParade());
     }
 
+    /**
+     * Affiche les informations utiles du personnage.
+     */
     public void affiche() {
         System.out.print("Nom : " + this.nom + ", Pdvie : " + this.getPtVie() + ", Pdmana : " + this.ptMana);
         System.out.println(", position : " + this.getPos().affiche());
@@ -201,5 +204,8 @@ public abstract class Personnage extends Creature {
     public void ajouterNourriture(Nourriture n) {
         nourriture.add(n);
     }
+    
+    @Override
+    public abstract String symbole();
 
 }

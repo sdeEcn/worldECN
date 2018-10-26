@@ -6,7 +6,8 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Permet de diviser une chaîne de caractère en sous-chaînes de caractères, en
+ * divisant à chaque espace.
  * @author Alban
  */
 public class StringInt {

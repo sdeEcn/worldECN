@@ -48,7 +48,7 @@ public class Soin extends Potion {
      */
     public void gueri(Personnage c) {
 
-        c.setPtVie(Math.min(c.getPtVie() + pouvoir, 100));
+        c.setPtVie(c.getPtVie() + pouvoir);
         System.out.println();
     }
 
@@ -74,5 +74,7 @@ public class Soin extends Potion {
         System.out.print("Soin, ");
         super.affiche();
     }
-
+    
+    @Override
+    public String symbole(){return "s";}
 }

@@ -25,7 +25,7 @@ public class ChargementRapide {
     }
 
     /**
-     * initialise le bufferReader
+     * Initialise le bufferReader.
      */
     public void init() {
         
@@ -39,7 +39,7 @@ public class ChargementRapide {
     }
 
     /**
-     * 
+     * Charge une partie.
      * @return un monde complété par la
      * @throws IOException 
      */
@@ -66,9 +66,9 @@ public class ChargementRapide {
 
     
     /**
-     * créé un element du jeu et l'insère avec toutes ses caractéristiques dans le monde chargé.
-     * @param chaine
-     * @param world 
+     * Créé un element du jeu et l'insère avec toutes ses caractéristiques dans le monde chargé.
+     * @param chaine = la ligne à décoder
+     * @param world = le monde où on instancie
      */
     public void creerElementJeu(String chaine, World world) {
         StringInt init = nextspace(0, chaine);
@@ -133,6 +133,11 @@ public class ChargementRapide {
         }
     }
 
+    /**
+     * Initialise le joueur
+     * @param chaine = la ligne à décoder
+     * @return le personnage joueur
+     */
     private Joueur initJoueur(String chaine) {
         Joueur joueur= new Joueur();
         String properties = chaine.substring(7);
@@ -174,7 +179,7 @@ public class ChargementRapide {
      * Retourne un tableau d'entier contenant les paramètres suivant le type du
      * personnages.
      *
-     * @param init
+     * @param init index
      * @return tableau de caractéristique
      */
     public static int[] liredonnees(StringInt init) {

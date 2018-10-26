@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Permet de sauvegarder une partie.
  * @author Alban
  */
 public class SauvegardePartie {
@@ -51,6 +51,9 @@ public class SauvegardePartie {
         }      
     }
     
+    /**
+     * Initialise le buffer.
+     */
     public void init(){
         try{
             this.buffer= new BufferedWriter(new FileWriter(REPOSITORY+this.nom+EXTENSION));
@@ -59,6 +62,11 @@ public class SauvegardePartie {
         }
     }
     
+    /**
+     * Sauvegarde le monde en cours.
+     * @param world = le monde à sauvegarder
+     * @return succès de l'opération
+     */
     public boolean sauvegarder(World world){
         boolean success =true;
         try{
@@ -113,7 +121,10 @@ public class SauvegardePartie {
     }
 
  
-
+    /**
+     * Sauvegarde les guerriers.
+     * @param guerrier 
+     */
     private void writeGuerriers(List<Guerrier> guerrier){
         guerrier.forEach((n)->{
             try {
@@ -127,7 +138,11 @@ public class SauvegardePartie {
             }
         });
     }
-
+    
+    /**
+     * Sauvegarde les archers.
+     * @param archer 
+     */
     private void writeArchers(List<Archer> archer) {
         archer.forEach((n)->{
             try {
@@ -142,6 +157,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les mages.
+     * @param mage 
+     */
     private void writeMages(List<Mage> mage) {
         mage.forEach((n)->{
             try {
@@ -156,6 +175,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les paysans.
+     * @param paysan 
+     */
     private void writePaysans(List<Paysan> paysan) {
        paysan.forEach((n)->{
             try {
@@ -170,11 +193,15 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les lapins.
+     * @param lapin 
+     */
     private void writeLapins(List<Lapin> lapin) {
         lapin.forEach((n)->{
             try {
                 buffer.write("Lapin "+n.getPtVie()+" "+n.getPourcentageAtt()
-                        +" "+n.getPourcentagePar()+                      
+                        +" "+n.getPourcentagePar()+" " +                  
                         n.getDegAtt()+" "+n.getParade()
                         +" "+n.getPos().getX()+" "+n.getPos().getY());
                 buffer.newLine();
@@ -184,11 +211,15 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les loups.
+     * @param loup 
+     */
     private void writeLoups(List<Loup> loup) {
         loup.forEach((n)->{
             try {
                 buffer.write("Loup "+n.getPtVie()+" "+n.getPourcentageAtt()
-                        +" "+n.getPourcentagePar()+                      
+                        +" "+n.getPourcentagePar()+ " "+                    
                         n.getDegAtt()+" "+n.getParade()
                         +" "+n.getPos().getX()+" "+n.getPos().getY());
                 buffer.newLine();
@@ -198,6 +229,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les potions de soins.
+     * @param soin 
+     */
     private void writePotion(List<Soin> soin) {
         soin.forEach((n)->{
             try {
@@ -210,6 +245,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les potions de mana.
+     * @param magie 
+     */
     private void writeMana(List<Mana> magie) {
          magie.forEach((n)->{
             try {
@@ -222,6 +261,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde les nuages toxiques.
+     * @param nuage 
+     */
     private void writeNuage(List<NuageToxique> nuage) {
          nuage.forEach((n)->{
             try {
@@ -234,6 +277,10 @@ public class SauvegardePartie {
         });
     }
 
+    /**
+     * Sauvegarde le joueur.
+     * @param joueur 
+     */
     private void writeJoueur(Joueur joueur) {
         String classe = joueur.getPerso().getClass().getSimpleName();
         Personnage n= joueur.getPerso();
@@ -247,9 +294,4 @@ public class SauvegardePartie {
                 ex.printStackTrace();
             }
     }
-    
-    
-    
-    
-    
 }

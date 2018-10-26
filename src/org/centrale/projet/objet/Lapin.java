@@ -41,4 +41,7 @@ public class Lapin extends Monstre {
         System.out.print("Lapin");
         super.affiche();
     }
+    
+    @Override
+    public String symbole(){return "l";}
 }

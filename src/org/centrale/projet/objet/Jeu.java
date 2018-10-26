@@ -15,24 +15,18 @@ import java.util.Scanner;
  *
  * @author Alban
  */
-public class TestSeance2 {
+public class Jeu {
 
     public static void main(String[] args) throws IOException {
         World w = new World();
         w.debutPartie();
-        for (int k = 0; k < 10; k++) {
-            System.out.println("tour n°" + k);
-            w.tourdejeu();
+        int k = 0;
+        boolean jeu = true;
+        while(jeu){
+            System.out.println();
+            System.out.println("Tour " + k + " :");
+            jeu = w.tourdejeu();
         }
-        ChargementRapide cr = new ChargementRapide("resources/Sauvegarde-WoE.txt");
-        cr.init();
-        
-        w.afficheWorld();
-        
-        SauvegardePartie sv= new SauvegardePartie("test");
-        sv.init();
-        sv.sauvegarder(w);
-
     }
 
 }

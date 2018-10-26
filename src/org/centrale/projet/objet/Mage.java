@@ -28,6 +28,7 @@ public class Mage extends Personnage implements Combattant {
      */
     @Override
     public void combattre(Creature c) {
+        System.out.println("Tour de combat de " + getNom() + " :");
         if (this.getPtMana() > 0) {
             this.setPtMana(this.getPtMana() - 1);
             Random rand = new Random();
@@ -35,19 +36,16 @@ public class Mage extends Personnage implements Combattant {
             distance = this.getPos().distance(c.getPos());
             if (distance <= this.getDistAttMax()) {//On vérifie que l'on peut toucher l'adversaire
                 if (success < this.getPourcentageMag()) { // L'attaque réussie
-                    int parade = rand.nextInt(100);
-                    int degats;
-                    degats = this.getDegMag();
-                    c.setPtVie(c.getPtVie() - degats); //on inflige des dégats à l'adversaire.
-                    System.out.println("Attaque réussie : vous avez infligé " + degats + " de dégats à l'adversaire");
+                    c.setPtVie(c.getPtVie() - this.getDegAtt()); //on inflige des dégats à l'adversaire.
+                    System.out.println("Attaque réussie de " + getNom() + " : " + this.getDegAtt() + " dégats infligés.");
                 } else {
-                    System.out.println("l'attaque échoue");
+                    System.out.println("Dans le vide!");
                 }
             } else {
-                System.out.println("Trop loin");
+                System.out.println("Trop loin.");
             }
         } else {
-            System.out.println("Pas assez de mana");
+            System.out.println("Oups... plus de mana.");
         }
     }
     
@@ -59,5 +57,8 @@ public class Mage extends Personnage implements Combattant {
         System.out.print("Mage, pdmana : " + getPtMana() + ", ");
         super.affiche();
     }
+    
+    @Override
+    public String symbole(){return "M";}
 
 }

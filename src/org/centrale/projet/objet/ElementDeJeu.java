@@ -10,5 +10,11 @@ package org.centrale.projet.objet;
  * @author antoinehurard
  */
 public abstract class ElementDeJeu {
-
+    
+    /**
+     * Le symbole représentant en textuel l'élément dans le jeu.
+     * @return symbole de l'élément dans le monde.
+     */
+    public abstract String symbole();
+    
 }

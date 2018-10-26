@@ -54,4 +54,7 @@ public class Loup extends Monstre implements Combattant {
         System.out.print("Loup");
         super.affiche();
     }
+    
+    @Override
+    public String symbole(){return "L";}
 }
